@@ -15,16 +15,15 @@ AddEventHandler('renzu_customs:ingarage', function(garage,garage_id)
                 end
                 if Config.InteractiveFeature['paintmenu'] and distance < 3 and ShopPermmision(currentprivate,'paintmenu') and Config.usePopui then
                     local table = {
-                        ['key'] = 'E', -- key
                         ['event'] = 'renzu_customs:openpaintmenu',
-                        ['title'] = 'Press [E] Open Paint Menu',
-                        ['server_event'] = false, -- server event or client
-                        ['unpack_arg'] = true, -- send args as unpack 1,2,3,4 order
-                        ['fa'] = '<i class="fas fa-garage"></i>',
-                        ['invehicle_title'] = 'Press [E] Open Stock Room',
-                        ['custom_arg'] = {k,v}, -- example: {1,2,3,4}
+                        ['title'] = 'Spray Paint Menu',
+                        ['confirm'] = '[ENTER]',
+                        ['reject'] = '[CLOSE]',
+                        ['fa'] = '<i class="fas fa-spray-can"></i>',
+                        ['use_cursor'] = false,
+                        ['custom_arg'] = {k,v},
                     }
-                    TriggerEvent('renzu_popui:drawtextuiwithinput',table)
+                    TriggerEvent('renzu_popui:showui',table)
                     while distance < 3 do
                         distance = #(GetEntityCoords(PlayerPedId()) - vector3(v.paintmenu.coord.x,v.paintmenu.coord.y,v.paintmenu.coord.z))
                         Wait(500)
@@ -41,16 +40,15 @@ AddEventHandler('renzu_customs:ingarage', function(garage,garage_id)
                             end
                             if distance < 3 and invehicle and Config.usePopui then
                                 local table = {
-                                    ['key'] = 'E', -- key
                                     ['event'] = 'renzu_customs:openmenu',
-                                    ['title'] = 'Press [E] Upgrade Menu',
-                                    ['server_event'] = false, -- server event or client
-                                    ['unpack_arg'] = true, -- send args as unpack 1,2,3,4 order
+                                    ['title'] = 'Upgrade Menu',
+                                    ['confirm'] = '[ENTER]',
+                                    ['reject'] = '[CLOSE]',
                                     ['fa'] = '<i class="fas fa-garage"></i>',
-                                    ['invehicle_title'] = 'Press [E] Upgrade Menu',
-                                    ['custom_arg'] = {}, -- example: {1,2,3,4}
+                                    ['use_cursor'] = false,
+                                    ['custom_arg'] = {},
                                 }
-                                TriggerEvent('renzu_popui:drawtextuiwithinput',table)
+                                TriggerEvent('renzu_popui:showui',table)
                                 while distance < 3 and IsPedInAnyVehicle(PlayerPedId()) do
                                     distance = #(GetEntityCoords(PlayerPedId()) - vector3(v.coord.x,v.coord.y,v.coord.z))
                                     Wait(500)
@@ -66,16 +64,15 @@ AddEventHandler('renzu_customs:ingarage', function(garage,garage_id)
                 end
                 if Config.InteractiveFeature['stockroom'] and distance < 3 and ShopPermmision(currentprivate,'stockroom') and Config.usePopui then
                     local table = {
-                        ['key'] = 'E', -- key
                         ['event'] = 'renzu_customs:openstockroom',
-                        ['title'] = 'Press [E] Open Stock Room',
-                        ['server_event'] = false, -- server event or client
-                        ['unpack_arg'] = true, -- send args as unpack 1,2,3,4 order
+                        ['title'] = 'Open Stock Room',
+                        ['confirm'] = '[ENTER]',
+                        ['reject'] = '[CLOSE]',
                         ['fa'] = '<i class="fas fa-garage"></i>',
-                        ['invehicle_title'] = 'Press [E] Open Stock Room',
-                        ['custom_arg'] = {k,v}, -- example: {1,2,3,4}
+                        ['use_cursor'] = false,
+                        ['custom_arg'] = {k,v},
                     }
-                    TriggerEvent('renzu_popui:drawtextuiwithinput',table)
+                    TriggerEvent('renzu_popui:showui',table)
                     while distance < 3 do
                         distance = #(GetEntityCoords(PlayerPedId()) - vector3(v.stockroom.coord.x,v.stockroom.coord.y,v.stockroom.coord.z))
                         Wait(500)
@@ -114,16 +111,15 @@ AddEventHandler('renzu_customs:ingarage', function(garage,garage_id)
             end
             if Config.InteractiveFeature['garage_inventory'] and inventorydis < 2 and not carrymode and not carrymod and ShopPermmision(currentprivate,'garage_inventory') and Config.usePopui then
                 local table = {
-                    ['key'] = 'E', -- key
                     ['event'] = 'renzu_customs:openinventory',
-                    ['title'] = 'Press [E] Open Inventory',
-                    ['server_event'] = false, -- server event or client
-                    ['unpack_arg'] = true, -- send args as unpack 1,2,3,4 order
+                    ['title'] = 'Open Inventory',
+                    ['confirm'] = '[ENTER]',
+                    ['reject'] = '[CLOSE]',
                     ['fa'] = '<i class="fas fa-car"></i>',
-                    ['invehicle_title'] = 'Press [E] Open Inventory',
-                    ['custom_arg'] = {currentprivate,activeshare}, -- example: {1,2,3,4}
+                    ['use_cursor'] = false,
+                    ['custom_arg'] = {currentprivate,activeshare},
                 }
-                TriggerEvent('renzu_popui:drawtextuiwithinput',table)
+                TriggerEvent('renzu_popui:showui',table)
                 while inventorydis < 3 and not carrymode do
                     inventorydis = #(GetEntityCoords(PlayerPedId()) - vector3(inv.coord.x,inv.coord.y,inv.coord.z))
                     Wait(500)
@@ -135,17 +131,15 @@ AddEventHandler('renzu_customs:ingarage', function(garage,garage_id)
                 end
                 if Config.usePopui then
                     local table = {
-                        ['key'] = 'E', -- key
                         ['event'] = 'renzu_customs:storemod',
-                        ['title'] = 'Press [E] Store',
-                        ['server_event'] = false, -- server event or client
-                        ['unpack_arg'] = true, -- send args as unpack 1,2,3,4 order
+                        ['title'] = 'Store Item',
+                        ['confirm'] = '[ENTER]',
+                        ['reject'] = '[CLOSE]',
                         ['fa'] = '<i class="fas fa-car"></i>',
-                        ['invehicle_title'] = 'Press [E] Open Inventory',
-                        --{index,lvl,k,nearveh,Config.VehicleMod[index]}
-                        ['custom_arg'] = {currentprivate,Config.VehicleMod[tostore[1]],tostore[2],false,false,true}, -- example: {1,2,3,4}
+                        ['use_cursor'] = false,
+                        ['custom_arg'] = {currentprivate,Config.VehicleMod[tostore[1]],tostore[2],false,false,true},
                     }
-                    TriggerEvent('renzu_popui:drawtextuiwithinput',table)
+                    TriggerEvent('renzu_popui:showui',table)
                     while inventorydis < 3 and not carrymode and carrymod do
                         inventorydis = #(GetEntityCoords(PlayerPedId()) - vector3(inv.coord.x,inv.coord.y,inv.coord.z))
                         Wait(500)
@@ -175,7 +169,7 @@ AddEventHandler('renzu_customs:openinventory', function(current)
                     multimenu[t.type:upper()][k] = {
                         ['title'] = t.label:upper()..' : LVL '..lvl..' x'..v,
                         ['fa'] = '<i class="fad fa-question-square"></i>',
-                        ['type'] = 'event', -- event / export
+                        ['type'] = 'event',
                         ['content'] = 'renzu_customs:getmod',
                         ['variables'] = {server = false, send_entity = false, onclickcloseui = true, custom_arg = {index,lvl,k}, arg_unpack = true},
                     }
@@ -231,7 +225,7 @@ AddEventHandler('renzu_customs:openstockroom', function(current)
                             multimenu[vehicle][v.label][i] = {
                                 ['title'] = label,
                                 ['fa'] = '<i class="fad fa-car"></i>',
-                                ['type'] = 'event', -- event / export
+                                ['type'] = 'event',
                                 ['content'] = 'renzu_customs:getmodfromstockroom',
                                 ['variables'] = {server = false, send_entity = false, onclickcloseui = true, custom_arg = {k,i,v.name,vehicle}, arg_unpack = true},
                             }
@@ -250,7 +244,7 @@ AddEventHandler('renzu_customs:openstockroom', function(current)
             localmultimenu[name][k] = {
                 ['title'] = 'Mod for '..name,
                 ['fa'] = '<i class="fad fa-car"></i>',
-                ['type'] = 'event', -- event / export
+                ['type'] = 'event',
                 ['content'] = 'renzu_customs:partlist',
                 ['variables'] = {server = false, send_entity = false, onclickcloseui = true, custom_arg = {k}, arg_unpack = true},
             }
@@ -289,15 +283,15 @@ AddEventHandler('renzu_customs:getmodfromstockroom', function(index,lvl,name,veh
             local dist = #(GetEntityCoords(PlayerPedId()) - GetEntityCoords(nearveh))
             if dist < 9 then
                 local table = {
-                    ['key'] = 'E', -- key
                     ['event'] = 'renzu_customs:installmod',
-                    ['title'] = 'Press [E] Install '..Config.VehicleMod[index].label..' Lvl '..lvl,
-                    ['server_event'] = false, -- server event or client
-                    ['unpack_arg'] = true, -- send args as unpack 1,2,3,4 order
+                    ['title'] = 'Install '..Config.VehicleMod[index].label..' Lvl '..lvl,
+                    ['confirm'] = '[ENTER]',
+                    ['reject'] = '[CLOSE]',
                     ['fa'] = '<i class="fas fa-car"></i>',
-                    ['custom_arg'] = {index,lvl,k,nearveh,Config.VehicleMod[index]}, -- example: {1,2,3,4}
+                    ['use_cursor'] = false,
+                    ['custom_arg'] = {index,lvl,k,nearveh,Config.VehicleMod[index]},
                 }
-                TriggerEvent('renzu_popui:drawtextuiwithinput',table)
+                TriggerEvent('renzu_popui:showui',table)
                 while dist < 9 do
                     newprop = GetVehicleProperties(nearveh)
                     nearveh = GetClosestVehicle(GetEntityCoords(PlayerPedId()), 2.000, 0, 70)
@@ -351,15 +345,15 @@ AddEventHandler('renzu_customs:getmod', function(index,lvl,k)
                     local dist = #(GetEntityCoords(PlayerPedId()) - GetEntityCoords(nearveh))
                     if dist < 9 then
                         local table = {
-                            ['key'] = 'E', -- key
                             ['event'] = 'renzu_customs:installmod',
-                            ['title'] = 'Press [E] Install '..Config.VehicleMod[index].label..' Lvl '..lvl,
-                            ['server_event'] = false, -- server event or client
-                            ['unpack_arg'] = true, -- send args as unpack 1,2,3,4 order
+                            ['title'] = 'Install '..Config.VehicleMod[index].label..' Lvl '..lvl,
+                            ['confirm'] = '[ENTER]',
+                            ['reject'] = '[CLOSE]',
                             ['fa'] = '<i class="fas fa-car"></i>',
-                            ['custom_arg'] = {index,lvl,k,nearveh,Config.VehicleMod[index]}, -- example: {1,2,3,4}
+                            ['use_cursor'] = false,
+                            ['custom_arg'] = {index,lvl,k,nearveh,Config.VehicleMod[index]},
                         }
-                        TriggerEvent('renzu_popui:drawtextuiwithinput',table)
+                        TriggerEvent('renzu_popui:showui',table)
                         while dist < 9 do
                             newprop = GetVehicleProperties(nearveh)
                             nearveh = GetClosestVehicle(GetEntityCoords(PlayerPedId()), 2.000, 0, 70)
@@ -383,12 +377,12 @@ AddEventHandler('renzu_customs:removevehiclemod', function(mod,lvl,vehicle)
         CarryMod("anim@heists@box_carry@","idle",mod.prop or 'hei_prop_heist_box',50,28422)
         carrymode = true
         NetworkRequestControlOfEntity(vehicle)
-		local attempt = 0
-		while not NetworkHasControlOfEntity(vehicle) and attempt < 100 and DoesEntityExist(vehicle) do
-			NetworkRequestControlOfEntity(vehicle)
-			Citizen.Wait(1)
-			attempt = attempt + 1
-		end
+        local attempt = 0
+        while not NetworkHasControlOfEntity(vehicle) and attempt < 100 and DoesEntityExist(vehicle) do
+            NetworkRequestControlOfEntity(vehicle)
+            Citizen.Wait(1)
+            attempt = attempt + 1
+        end
         SetVehicleMod(vehicle, tonumber(mod.index), -1, false)
         Wait(150)
         newprop = GetVehicleProperties(vehicle)
@@ -402,15 +396,15 @@ AddEventHandler('renzu_customs:removevehiclemod', function(mod,lvl,vehicle)
             if Config.usePopui and ShopPermmision(currentprivate,'garage_inventory') then
                 if distance < 3 then
                     local table = {
-                        ['key'] = 'E', -- key
                         ['event'] = 'renzu_customs:storemod',
-                        ['title'] = 'Press [E] Store '..mod.label,
-                        ['server_event'] = false, -- server event or client
-                        ['unpack_arg'] = true, -- send args as unpack 1,2,3,4 order
+                        ['title'] = 'Store '..mod.label,
+                        ['confirm'] = '[ENTER]',
+                        ['reject'] = '[CLOSE]',
                         ['fa'] = '<i class="fas fa-car"></i>',
-                        ['custom_arg'] = {currentprivate,mod,lvl,newprop}, -- example: {1,2,3,4}
+                        ['use_cursor'] = false,
+                        ['custom_arg'] = {currentprivate,mod,lvl,newprop},
                     }
-                    TriggerEvent('renzu_popui:drawtextuiwithinput',table)
+                    TriggerEvent('renzu_popui:showui',table)
                     while distance < 3 do
                         newprop = GetVehicleProperties(vehicle)
                         distance = #(GetEntityCoords(PlayerPedId()) - vector3(vec.coord.x,vec.coord.y,vec.coord.z))
@@ -440,18 +434,14 @@ AddEventHandler('renzu_customs:vehiclemod', function(vehicle)
                     multimenu[mod.type:upper()][mod.label:upper()..' '..GetVehicleMod(vehicle,i) + 1] = {
                         ['title'] = mod.label..' '..GetVehicleMod(vehicle,i) + 1,
                         ['fa'] = '<img style="height: auto;position: absolute;max-width: 30px;left:5%;top:25%;" src="https://cfx-nui-renzu_customs/html/img/'..i..'.svg">',
-                        ['type'] = 'event', -- event / export
+                        ['type'] = 'event',
                         ['content'] = 'renzu_customs:removevehiclemod',
                         ['variables'] = {server = false, send_entity = false, onclickcloseui = true, custom_arg = {mod,GetVehicleMod(vehicle,mod.index) + 1,vehicle}, arg_unpack = true},
                     }
                     openmenu = true
                 end
-                --multimenu[mod.type:upper()] = firstmenu[mod.index]
             end
-            -- max = GetNumVehicleMods(vehicle, modType) - 1
-            -- SetVehicleMod(vehicle, tonumber(modType), tonumber(max), customWheels)
         end
-        --ToggleVehicleMod(vehicle, 18, true) -- Turbo
         if openmenu then
             TriggerEvent('renzu_contextmenu:insertmulti',multimenu,"Vehicle Parts",false,"Vehicle Mods")
             TriggerEvent('renzu_contextmenu:show')
@@ -464,20 +454,20 @@ end)
 RegisterNetEvent('renzu_customs:soundsync')
 AddEventHandler('renzu_customs:soundsync', function(table)
     local volume = table['volume']
-	local mycoord = GetEntityCoords(PlayerPedId())
-	local distIs  = tonumber(string.format("%.1f", #(mycoord - table['coord'])))
-	if (distIs <= 30) then
-		distPerc = distIs / 30
-		volume = (1-distPerc) * table['volume']
-		local table = {
-			['file'] = table['file'],
-			['volume'] = volume
-		}
-		SendNUIMessage({
-			type = "playsound",
-			content = table
-		})
-	end
+    local mycoord = GetEntityCoords(PlayerPedId())
+    local distIs  = tonumber(string.format("%.1f", #(mycoord - table['coord'])))
+    if (distIs <= 30) then
+        distPerc = distIs / 30
+        volume = (1-distPerc) * table['volume']
+        local table = {
+            ['file'] = table['file'],
+            ['volume'] = volume
+        }
+        SendNUIMessage({
+            type = "playsound",
+            content = table
+        })
+    end
 end)
 
 RegisterNetEvent('renzu_customs:receivenetworkid')
@@ -511,11 +501,11 @@ AddEventHandler('renzu_customs:custom_tire', function(tires,net,tire)
         Wait(2000)
         local default = GetHandlingfromModel(GetEntityModel(vehicle),vehicle)
         if default then
-            SetVehicleHandlingFloat(vehicle , "CHandlingData", "fLowSpeedTractionLossMult", default.fLowSpeedTractionLossMult + 0.0) -- self.start burnout less = traction
-            SetVehicleHandlingFloat(vehicle , "CHandlingData", "fTractionLossMult", default.fTractionLossMult + 0.0)  -- asphalt mud less = traction
-            SetVehicleHandlingFloat(vehicle , "CHandlingData", "fTractionCurveMin", default.fTractionCurveMin + 0.0) -- accelaration grip
-            SetVehicleHandlingFloat(vehicle , "CHandlingData", "fTractionCurveMax", default.fTractionCurveMax + 0.0) -- cornering grip
-            SetVehicleHandlingFloat(vehicle , "CHandlingData", "fTractionCurveLateral", default.fTractionCurveLateral + 0.0) -- curve lateral grip
+            SetVehicleHandlingFloat(vehicle , "CHandlingData", "fLowSpeedTractionLossMult", default.fLowSpeedTractionLossMult + 0.0)
+            SetVehicleHandlingFloat(vehicle , "CHandlingData", "fTractionLossMult", default.fTractionLossMult + 0.0)
+            SetVehicleHandlingFloat(vehicle , "CHandlingData", "fTractionCurveMin", default.fTractionCurveMin + 0.0)
+            SetVehicleHandlingFloat(vehicle , "CHandlingData", "fTractionCurveMax", default.fTractionCurveMax + 0.0)
+            SetVehicleHandlingFloat(vehicle , "CHandlingData", "fTractionCurveLateral", default.fTractionCurveLateral + 0.0)
         end
     end
 end)
@@ -647,15 +637,15 @@ AddEventHandler('renzu_customs:paint', function(color,spray)
                 local dist = #(GetEntityCoords(PlayerPedId()) - GetEntityCoords(nearveh))
                 if dist < 9 then
                     local table = {
-                        ['key'] = 'E', -- key
                         ['event'] = 'renzu_customs:paint',
-                        ['title'] = 'Press [E] Spray ('..color..') This Vehicle',
-                        ['server_event'] = false, -- server event or client
-                        ['unpack_arg'] = true, -- send args as unpack 1,2,3,4 order
+                        ['title'] = 'Spray ('..color..') This Vehicle',
+                        ['confirm'] = '[ENTER]',
+                        ['reject'] = '[CLOSE]',
                         ['fa'] = '<i class="fas fa-car"></i>',
-                        ['custom_arg'] = {color,true}, -- example: {1,2,3,4}
+                        ['use_cursor'] = false,
+                        ['custom_arg'] = {color,true},
                     }
-                    TriggerEvent('renzu_popui:drawtextuiwithinput',table)
+                    TriggerEvent('renzu_popui:showui',table)
                     while tospray do
                         nearveh = GetClosestVehicle(GetEntityCoords(PlayerPedId()), 2.000, 0, 70)
                         dist = #(GetEntityCoords(PlayerPedId()) - GetEntityCoords(nearveh))
@@ -685,7 +675,7 @@ AddEventHandler('renzu_customs:openpaintmenu', function(garage,garage_id)
             localmultimenu[name][name] = {
                 ['title'] = 'Color '..name:upper(),
                 ['fa'] = '<i class="fad fa-car"></i>',
-                ['type'] = 'event', -- event / export
+                ['type'] = 'event',
                 ['content'] = 'renzu_customs:paint',
                 ['variables'] = {server = false, send_entity = false, onclickcloseui = true, custom_arg = {name}, arg_unpack = true},
             }
@@ -701,7 +691,7 @@ Playerloaded()
 
 RegisterNetEvent('renzu_customs:receivedata')
 AddEventHandler('renzu_customs:receivedata', function(turbo,engine,vehicleprice)
-	netids = engine
+    netids = engine
     customturbo = turbo
     for k,v in pairs(vehicleprice) do
         table.insert(Config.VehicleValueList,{model = v.model, value = v.price})
@@ -709,3 +699,33 @@ AddEventHandler('renzu_customs:receivedata', function(turbo,engine,vehicleprice)
 end)
 
 SetJob()
+
+Citizen.CreateThread(function()
+    while true do
+        local sleep = 500
+        local coords = GetEntityCoords(PlayerPedId())
+        for i, v in pairs(Config.Locations) do
+            local pos = Config.Locations[i]
+            local dist = GetDistanceBetweenCoords(pos["x"], pos["y"], pos["z"] + 0.98, coords, true)
+            if dist <= 3.5 then
+                local table = {
+                    ['event'] = 'opengarage',
+                    ['title'] = 'Garage A',
+                    ['confirm'] = '[ENTER]',
+                    ['reject'] = '[CLOSE]',
+                    ['fa'] = '<i class="fad fa-gas-pump"></i>',
+                    ['use_cursor'] = false,
+                }
+                TriggerEvent('renzu_popui:showui',table)
+                while dist <= 3.5 do
+                    coords = GetEntityCoords(PlayerPedId())
+                    dist = GetDistanceBetweenCoords(pos["x"], pos["y"], pos["z"] + 0.98, coords, true)
+                    Wait(500)
+                end
+                TriggerEvent('renzu_popui:closeui')
+                Wait(1000)
+            end
+        end
+        Citizen.Wait(sleep)
+    end
+end)
